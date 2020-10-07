@@ -175,7 +175,9 @@ public class ValveCalculate {
       }
     }
     System.out.println("双阀地井阀:" + valveTwo);
-    System.out.println(valveTwo.size());
+      System.out.println(valveTwo);
+    System.out.println("双阀地井阀个数:" + valveTwo.size());
+      System.out.println("listTest:" + listTest);
     for (int j = 0; j < valveTwo.size(); j++) {
       int count1 = 0;
       for (int i2 = 0; i2 < listTest.size(); i2++) {
@@ -242,12 +244,12 @@ public class ValveCalculate {
           } else {
             ((List<String>)valveTwo.get(j)).add("倾斜");
             int varS1_1 = (int)Double.parseDouble(((List<String>)pipeTest.get(0)).get(1));
-            double varS11_1 = Double.parseDouble(((List<String>)pipeTest.get(0)).get(1));
-            int varS2_1 = (int)Double.parseDouble(((List<String>)pipeTest.get(0)).get(2));
-            double varS22_1 = Double.parseDouble(((List<String>)pipeTest.get(0)).get(2));
-            int varE1_1 = (int)Double.parseDouble(((List<String>)pipeTest.get(0)).get(4));
-            double varE11_1 = Double.parseDouble(((List<String>)pipeTest.get(0)).get(4));
-            int varE2_1 = (int)Double.parseDouble(((List<String>)pipeTest.get(0)).get(5));
+            double varS11_1 = Double.parseDouble((pipeTest.get(0)).get(1));
+            int varS2_1 = (int)Double.parseDouble((pipeTest.get(0)).get(2));
+            double varS22_1 = Double.parseDouble((pipeTest.get(0)).get(2));
+            int varE1_1 = (int)Double.parseDouble((pipeTest.get(0)).get(4));
+            double varE11_1 = Double.parseDouble((pipeTest.get(0)).get(4));
+            int varE2_1 = (int)Double.parseDouble((pipeTest.get(0)).get(5));
             double varE22_1 = Double.parseDouble(((List<String>)pipeTest.get(0)).get(5));
             int varS1_2 = (int)Double.parseDouble(((List<String>)pipeTest.get(1)).get(1));
             double varS11_2 = Double.parseDouble(((List<String>)pipeTest.get(1)).get(1));
@@ -266,7 +268,7 @@ public class ValveCalculate {
             int varE2_3 = (int)Double.parseDouble(((List<String>)pipeTest.get(2)).get(5));
             double varE22_3 = Double.parseDouble(((List<String>)pipeTest.get(2)).get(5));
             double k1 = (var1_1 - var111) / (var112 - var2_2);
-            double b1 = (Math.pow(var111, 2.0D) + Math.pow(var112, 2.0D) - var1_1 * var111 + var2_2 * var112) / (var112 - var2_2);
+            double b1 = (Math.pow(var111, 2.0D) + Math.pow(var112, 2.0D) - var1_1 * var111 - var2_2 * var112) / (var112 - var2_2);
             if (df.format((varS22_1 - varE22_1) / (varS11_1 - varE11_1)).equals(df.format((varS22_2 - varE22_2) / (varS11_2 - varE11_2)))) {
               double k2 = (varS22_1 - varE22_1) / (varS11_1 - varE11_1);
               double b2 = (varE22_1 * varS11_1 - varS22_1 * varE11_1) / (varS11_1 - varE11_1);
@@ -285,8 +287,9 @@ public class ValveCalculate {
                 valve.add(((List<String>)valveTwo.get(j)).get(0));
                 valve.add(String.valueOf(x2));
                 valve.add(String.valueOf(y2));
-                valves.add(valve);
               }
+                valves.add(valve);
+                System.out.println("111" + valves);
             } else if (df.format((varS22_1 - varE22_1) / (varS11_1 - varE11_1)).equals(df.format((varS22_3 - varE22_3) / (varS11_3 - varE11_3)))) {
               double k2 = (varS22_1 - varE22_1) / (varS11_1 - varE11_1);
               double b2 = (varE22_1 * varS11_1 - varS22_1 * varE11_1) / (varS11_1 - varE11_1);
@@ -305,8 +308,9 @@ public class ValveCalculate {
                 valve.add(((List<String>)valveTwo.get(j)).get(0));
                 valve.add(String.valueOf(x2));
                 valve.add(String.valueOf(y2));
-                valves.add(valve);
               }
+                valves.add(valve);
+                System.out.println("111" + valves);
             } else if (df.format((varS22_2 - varE22_2) / (varS11_2 - varE11_2)).equals(df.format((varS22_3 - varE22_3) / (varS11_3 - varE11_3)))) {
               double k2 = (varS22_1 - varE22_1) / (varS11_1 - varE11_1);
               double b2 = (varE22_1 * varS11_1 - varS22_1 * varE11_1) / (varS11_1 - varE11_1);
@@ -325,12 +329,14 @@ public class ValveCalculate {
                 valve.add(((List<String>)valveTwo.get(j)).get(0));
                 valve.add(String.valueOf(x2));
                 valve.add(String.valueOf(y2));
-                valves.add(valve);
               }
+                valves.add(valve);
+                System.out.println("111" + valves);
             }
           }
         }
       }
+        System.out.println("111111" + valves);
       if (count1 > 1) {
         String error = "[此地井阀存在问题,阀内存在不止一个节点,地井阀坐标：(" + (String)((List<String>)valveTwo.get(j)).get(1) + "," + (String)((List<String>)valveTwo.get(j)).get(2) + ")]";
         errors.add(error);
@@ -340,20 +346,19 @@ public class ValveCalculate {
     for (int i = 0; i < valveTwo.size(); i++) {
       List<String> valve = new ArrayList<>();
       List<String> valve1 = new ArrayList<>();
-      if (((List)valveTwo.get(i)).size() == 7) {
+      if ((valveTwo.get(i)).size() == 7) {
         System.out.println("不含节点的双阀地井阀:" + valveTwo.get(i));
-        double x1 = Double.parseDouble(((List<String>)valveTwo.get(i)).get(1));
-        double d1 = Double.parseDouble(((List<String>)valveTwo.get(i)).get(2));
-        double x2 = Double.parseDouble(((List<String>)valveTwo.get(i)).get(3));
-        double y2 = Double.parseDouble(((List<String>)valveTwo.get(i)).get(4));
-        double xC = Double.parseDouble(((List<String>)valveTwo.get(i)).get(5));
-        double yC = Double.parseDouble(((List<String>)valveTwo.get(i)).get(6));
+        double x1 = Double.parseDouble((valveTwo.get(i)).get(1));
+        double d1 = Double.parseDouble((valveTwo.get(i)).get(2));
+        double x2 = Double.parseDouble((valveTwo.get(i)).get(3));
+        double y2 = Double.parseDouble((valveTwo.get(i)).get(4));
+        double xC = Double.parseDouble((valveTwo.get(i)).get(5));
+        double yC = Double.parseDouble((valveTwo.get(i)).get(6));
         double k11 = (x2 - x1) / (d1 - y2);
-        double b11 = (Math.pow(x1, 2.0D) + Math.pow(d1, 2.0D) - Math.pow(x2, 2.0D) + Math.pow(y2, 2.0D)) / 2.0D * (d1 - y2);
+        double b11 = (Math.pow(x1, 2.0D) + Math.pow(d1, 2.0D) - Math.pow(x2, 2.0D) - Math.pow(y2, 2.0D)) / 2.0D * (d1 - y2);
         double k1 = (d1 - y2) / (x1 - x2);
         double b1 = (x1 * y2 - x2 * d1) / (x1 - x2);
-        int i2;
-        for (i2 = 0; i2 < pipe.size(); i2++) {
+        for (int i2 = 0; i2 < pipe.size(); i2++) {
           double x3 = Double.parseDouble(((List<String>)pipe.get(i2)).get(1));
           double y3 = Double.parseDouble(((List<String>)pipe.get(i2)).get(2));
           double x4 = Double.parseDouble(((List<String>)pipe.get(i2)).get(4));
@@ -368,7 +373,7 @@ public class ValveCalculate {
                 valve.add(String.valueOf(y));
               }
             }
-          } else if (df.format(y3).equals(df.format(y4))) {
+          }else if (df.format(y3).equals(df.format(y4))) {
             if (xC < MathMethod.getBig2(x3, x4) && xC > MathMethod.getSmall2(x3, x4)) {
               double x = (y3 - b1) / k1;
               double y = y3;
@@ -378,7 +383,7 @@ public class ValveCalculate {
                 valve.add(String.valueOf(y));
               }
             }
-          } else if ((xC < MathMethod.getBig2(x3, x4) && xC > MathMethod.getSmall2(x3, x4)) || (yC < MathMethod.getBig2(y3, y4) && yC > MathMethod.getSmall2(y3, y4))) {
+          }else if ((xC < MathMethod.getBig2(x3, x4) && xC > MathMethod.getSmall2(x3, x4)) || (yC < MathMethod.getBig2(y3, y4) && yC > MathMethod.getSmall2(y3, y4))) {
             double k2 = (y3 - y4) / (x3 - x4);
             double b2 = (x3 * y4 - x4 * y3) / (x3 - x4);
             if (!df.format(k1).equals(df.format(k2))) {
@@ -392,70 +397,84 @@ public class ValveCalculate {
             }
           }
         }
-        System.out.println(valve.size());
-        if (valve.size() == 6)
-          valves.add(valve);
-        if (valve.size() != 6)
-          for (i2 = 0; i2 < pipe.size(); i2++) {
-            double x3 = Double.parseDouble(((List<String>)pipe.get(i2)).get(1));
-            double y3 = Double.parseDouble(((List<String>)pipe.get(i2)).get(2));
-            double x4 = Double.parseDouble(((List<String>)pipe.get(i2)).get(4));
-            double y4 = Double.parseDouble(((List<String>)pipe.get(i2)).get(5));
-            double k2 = (y3 - y4) / (x3 - x4);
-            double b2 = (x3 * y4 - x4 * y3) / (x3 - x4);
-            if ((xC < MathMethod.getBig2(x3, x4) && xC > MathMethod.getSmall2(x3, x4)) || (yC < MathMethod.getBig2(y3, y4) && yC > MathMethod.getSmall2(y3, y4))) {
-              double xx = (b11 - b2) / (k2 - k11);
-              double yy = (k2 * b11 - k11 * b2) / (k2 - k11);
-              if (yy > d1 && yy < y2 && xx > x1 && xx < x2) {
-                valve1.add(((List<String>)valveTwo.get(i)).get(0));
-                valve1.add(String.valueOf(xx));
-                valve1.add(String.valueOf(yy));
+        if (valve.size() == 6){
+            valves.add(valve);
+            System.out.println("阀的具体位置:" + valve);
+        }
+          if (valve.size() != 6){
+              System.out.println("进入计算：");
+              for (int i2 = 0; i2 < pipe.size(); i2++) {
+                  double x3 = Double.parseDouble(((List<String>)pipe.get(i2)).get(1));
+                  double y3 = Double.parseDouble(((List<String>)pipe.get(i2)).get(2));
+                  double x4 = Double.parseDouble(((List<String>)pipe.get(i2)).get(4));
+                  double y4 = Double.parseDouble(((List<String>)pipe.get(i2)).get(5));
+                  double k2 = (y3 - y4) / (x3 - x4);
+                  double b2 = (x3 * y4 - x4 * y3) / (x3 - x4);
+                  if ((xC < MathMethod.getBig2(x3, x4) && xC > MathMethod.getSmall2(x3, x4)) || (yC < MathMethod.getBig2(y3, y4) && yC > MathMethod.getSmall2(y3, y4))) {
+                      double xx = (b11 - b2) / (k2 - k11);
+                      double yy = (k2 * b11 - k11 * b2) / (k2 - k11);
+                      System.out.println("进入计算2：");
+                      if (yy > d1 && yy < y2 || xx > x1 && xx < x2) {
+                          valve1.add(((List<String>)valveTwo.get(i)).get(0));
+                          valve1.add(String.valueOf(xx));
+                          valve1.add(String.valueOf(yy));
+                          System.out.println("进入计算3：");
+                      }
+                  }
               }
-            }
           }
+
         System.out.println(valve1.size());
-        if (valve1.size() == 6)
-          valves.add(valve1);
+        if (valve1.size() == 6){
+            valves.add(valve1);
+            System.out.println("阀的具体位置2:" + valve1);
+        }
         if (valve.size() != 6 && valve1.size() != 6) {
           String error = "[此双阀地井阀内的阀门数量少于2个存在问题,坐标为：(" + (String)((List<String>)valveTwo.get(i)).get(1) + "," + (String)((List<String>)valveTwo.get(i)).get(2) + ")]";
           errors.add(error);
         }
       }
     }
+
     System.out.println("阀门位置" + valves);
+      System.out.println(valves);
     System.out.println("阀门个数" + valves.size());
     List<List<String>> halfValves = new ArrayList<>();
     for (int m = 0; m < valves.size(); m++) {
       List<String> halfValve1 = new ArrayList<>();
       List<String> halfValve2 = new ArrayList<>();
-      halfValve1.add(((List<String>)valves.get(m)).get(0));
-      halfValve1.add(((List<String>)valves.get(m)).get(1));
-      halfValve1.add(((List<String>)valves.get(m)).get(2));
-      halfValve2.add(((List<String>)valves.get(m)).get(3));
-      halfValve2.add(((List<String>)valves.get(m)).get(4));
-      halfValve2.add(((List<String>)valves.get(m)).get(5));
+      halfValve1.add((valves.get(m)).get(0));
+      halfValve1.add((valves.get(m)).get(1));
+      halfValve1.add((valves.get(m)).get(2));
+      halfValve2.add((valves.get(m)).get(3));
+      halfValve2.add((valves.get(m)).get(4));
+      halfValve2.add((valves.get(m)).get(5));
       halfValves.add(halfValve1);
       halfValves.add(halfValve2);
     }
+      System.out.println("单个阀门位置" + halfValves);
+      System.out.println("单个阀门个数" + halfValves.size());
     MathMethod.add(halfValves, listTest);
+      System.out.println("全部节点的位置" + listTest);
     List<Integer> n1 = new ArrayList<>();
     for (int n = 0; n < halfValves.size(); n++) {
-      for (int i2 = 0; i2 < pipe.size(); i2++) {
-        int var1 = (int)Double.parseDouble(((List<String>)pipe.get(i2)).get(1));
-        double var11 = Double.parseDouble(((List<String>)pipe.get(i2)).get(1));
-        int var2 = (int)Double.parseDouble(((List<String>)pipe.get(i2)).get(4));
-        double var22 = Double.parseDouble(((List<String>)pipe.get(i2)).get(4));
-        int var3 = (int)Double.parseDouble(((List<String>)pipe.get(i2)).get(2));
-        double var33 = Double.parseDouble(((List<String>)pipe.get(i2)).get(2));
-        int var4 = (int)Double.parseDouble(((List<String>)pipe.get(i2)).get(5));
-        double var44 = Double.parseDouble(((List<String>)pipe.get(i2)).get(5));
         int var5 = listTest.size() - halfValves.size() + n;
-        int var6 = (int)Double.parseDouble(((List<String>)listTest.get(var5)).get(1));
-        double var66 = Double.parseDouble(((List<String>)listTest.get(var5)).get(1));
-        int var7 = (int)Double.parseDouble(((List<String>)listTest.get(var5)).get(2));
-        double var77 = Double.parseDouble(((List<String>)listTest.get(var5)).get(2));
+        System.out.println("var5:" + var5);
+      for (int i2 = 0; i2 < pipe.size(); i2++) {
+        int var1 = (int)Double.parseDouble((pipe.get(i2)).get(1));
+        double var11 = Double.parseDouble((pipe.get(i2)).get(1));
+        int var2 = (int)Double.parseDouble((pipe.get(i2)).get(4));
+        double var22 = Double.parseDouble((pipe.get(i2)).get(4));
+        int var3 = (int)Double.parseDouble((pipe.get(i2)).get(2));
+        double var33 = Double.parseDouble((pipe.get(i2)).get(2));
+        int var4 = (int)Double.parseDouble((pipe.get(i2)).get(5));
+        double var44 = Double.parseDouble((pipe.get(i2)).get(5));
+        int var6 = (int)Double.parseDouble((listTest.get(var5)).get(1));
+        double var66 = Double.parseDouble((listTest.get(var5)).get(1));
+        int var7 = (int)Double.parseDouble((listTest.get(var5)).get(2));
+        double var77 = Double.parseDouble((listTest.get(var5)).get(2));
         if (var3 == var4 && var7 == var3 && var6 < MathMethod.getBig(var1, var2) && var6 > MathMethod.getSmall(var1, var2)) {
-          System.out.println("管段编号:" + (String)((List<String>)pipe.get(i2)).get(0) + ",节点编号:" + var5 + 1);
+          System.out.println("管段编号:" + (String)((List<String>)pipe.get(i2)).get(0) + ",节点编号:" + (var5 + 1));
           n1.add(Integer.valueOf(var5 + 1));
           List<String> list1 = new ArrayList<>();
           List<String> list2 = new ArrayList<>();
@@ -481,7 +500,7 @@ public class ValveCalculate {
           MathMethod.sequence(pipe);
         }
         if (var1 == var2 && var6 == var1 && var7 < MathMethod.getBig(var3, var4) && var7 > MathMethod.getSmall(var3, var4)) {
-          System.out.println("管段编号:" + (String)((List<String>)pipe.get(i2)).get(0) + ",节点编号:" + var5 + 1);
+          System.out.println("管段编号:" + (String)((List<String>)pipe.get(i2)).get(0) + ",节点编号:" + (var5 + 1));
           n1.add(Integer.valueOf(var5 + 1));
           List<String> list1 = new ArrayList<>();
           List<String> list2 = new ArrayList<>();
@@ -510,7 +529,7 @@ public class ValveCalculate {
           MathMethod.getBig2(var33, var44) && var77 > MathMethod.getSmall2(var33, var44) && df
           .format((var44 - var33) / (var22 - var11)).equals(df.format((var44 - var77) / (var22 - var66))) && df
           .format((var44 - var33) / (var22 - var11)).equals(df.format((var33 - var77) / (var11 - var66)))) {
-          System.out.println("管段编号:" + (String)((List<String>)pipe.get(i2)).get(0) + ",节点编号:" + var5 + 1);
+          System.out.println("管段编号:" + (String)((List<String>)pipe.get(i2)).get(0) + ",节点编号:" + (var5 + 1));
           n1.add(Integer.valueOf(var5 + 1));
           List<String> list1 = new ArrayList<>();
           List<String> list2 = new ArrayList<>();
@@ -557,8 +576,9 @@ public class ValveCalculate {
       System.out.println("未统计的双阀地井阀节点编号:" + n2);
       for (int i1 = 0; i1 < n2.size(); i1++) {
         for (int i2 = 0; i2 < listTest.size(); i2++) {
-          if (((Integer)n2.get(i1)).intValue() == Integer.parseInt(((List<String>)listTest.get(i2)).get(0))) {
-            System.out.println("未统计的双阀地井阀节点" + n2.get(i1) + "的坐标为:(" + (String)((List<String>)listTest.get(i2)).get(1) + "," + (String)((List<String>)listTest.get(i2)).get(2) + ")");
+          if ((n2.get(i1)).intValue() == Integer.parseInt((listTest.get(i2)).get(0))) {
+            System.out.println("未统计的双阀地井阀节点" + n2.get(i1) + "的坐标为:(" + listTest.get(i2).get(1) + "," + listTest.get(i2).get(2) + ")");
+              System.out.println("未统计的双阀地井阀节点" + n2.get(i1) + "为:" + listTest.get(i2));
             String error = "未统计的双阀地井阀节点" + n2.get(i1) + "的坐标为:(" + (String)((List<String>)listTest.get(i2)).get(1) + "," + (String)((List<String>)listTest.get(i2)).get(2) + ")";
             errors.add(error);
             break;
