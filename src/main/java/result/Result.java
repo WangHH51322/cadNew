@@ -18,6 +18,7 @@ import static data.ValveCalculate.*;
 import static data.ValveCalculate.doubleValve;
 import static data.ValveCalculate.singleValve;
 import static data.ValveCalculate.tribleValve;
+import static excel.Out2Excel.dataExcel;
 import static result.InPut.blockContact;
 import static result.InPut.nodeContact;
 import static result.InPut.pipeContact;
@@ -101,28 +102,32 @@ public class Result {
         //判断哪些节点在地井阀中
         //判断地井阀中心点与节点的相对位置
         //并根据相对位置,确定具体阀的位置
-//        System.out.println("加入三阀地井阀后的管段:" + tribleValve(valve, nodeList, pipeList,distance,errors));
-//        System.out.println("加入三阀地井阀后管段数目:" + pipeList.size());
-//        System.out.println("加入三阀地井阀后的节点" + nodeList);
-//        System.out.println("加入三阀地井阀后节点数目:" + nodeList.size());
-//        System.out.println("加入三阀后的误差" + errors);
-//        System.out.println("*************************************");
+        System.out.println("加入三阀地井阀后的管段:" + tribleValve(valve, nodeList, pipeList,distance,errors));
+        System.out.println("加入三阀地井阀后管段数目:" + pipeList.size());
+        System.out.println("加入三阀地井阀后的节点" + nodeList);
+        System.out.println("加入三阀地井阀后节点数目:" + nodeList.size());
+        System.out.println("加入三阀后的误差" + errors);
+        System.out.println("*************************************");
 
 
         //判断加油栓是否在节点上,并更改节点名称
 //        addPlugIntoNode(plug,nodeList);
         //将与节点重合的加油栓从加油栓数组中删去
-//        List<List<String>> newPlug = removePlug(plug,nodeList);
-//        System.out.println("不重合加油栓个数:" + newPlug.size());
-//
-//        System.out.println("加入加油栓后的管段" + addPlug(newPlug, nodeList, pipeList));
-//        System.out.println("加入加油栓后管段数目:" + pipeList.size());
-//        System.out.println("加入加油栓后的节点" + nodeList);
-//        System.out.println("加入加油栓后节点数目:" + nodeList.size());
-//        System.out.println("*************************************");
+        List<List<String>> newPlug = removePlug(plug,nodeList);
+        System.out.println("不重合加油栓个数:" + newPlug.size());
 
-//        dataExcel(pipeList,excelPath,pipeSheetName);
-//        dataExcel(nodeList,excelPath,nodeSheetName);
+        System.out.println("加入加油栓后的管段" + addPlug(newPlug, nodeList, pipeList));
+        System.out.println("加入加油栓后管段数目:" + pipeList.size());
+        System.out.println("加入加油栓后的节点" + nodeList);
+        System.out.println("加入加油栓后节点数目:" + nodeList.size());
+        System.out.println("*************************************");
+
+
+        String excelPath = "D:\\data\\result.xlsx";
+        String pipeSheetName = "pipe";
+        dataExcel(pipeList,excelPath,pipeSheetName);
+        String nodeSheetName = "node";
+        dataExcel(nodeList,excelPath,nodeSheetName);
         return errors;
     }
 

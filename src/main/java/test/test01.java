@@ -25,13 +25,19 @@ public class test01 {
     public static void main(String[] args) throws FileNotFoundException, ParseException {
 
         //.dxf文件存放的路径
-        String dataPath = "D:\\data\\test1.dxf";
+        String dataPath = "D:\\data\\data3.dxf";
+//        String dataPath = "D:\\data\\test1.dxf";
 
         //需要读取的管段所在的图层名称,目前支持最多5个图层
 
         List<String> LayerNames = new ArrayList<>();
-        LayerNames.add("--GY-DN150");
-        LayerNames.add("--GY-管道DN450");
+//        LayerNames.add("--GY-DN150");
+        LayerNames.add("--GY-DN300");
+        LayerNames.add("--GY-DN400");
+        LayerNames.add("--GY-DN450");
+//        LayerNames.add("--GY-阀门井");
+//        LayerNames.add("--GY-阀门井");
+//        LayerNames.add("--GY-管道DN450");
         List<String> s = FirstRead(dataPath,LayerNames);
         System.out.println(s);
 
@@ -50,7 +56,10 @@ public class test01 {
 
         //管段自动排错
         List<String> error = errorPipeFirst(pipe);
-
+        if(error.size() == 0){
+            String noError = "预读取无问题，可直接输出结果！";
+            error.add(noError);
+        }
         return error;
     }
 
