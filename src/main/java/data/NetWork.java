@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static data.MathMethod.*;
+import static excel.Out2Excel.dataExcel;
 
 /**
  * @author Qing

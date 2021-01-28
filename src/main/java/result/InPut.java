@@ -70,7 +70,7 @@ public class InPut {
     public static List<List<String>> blockContact(String dataPath) throws FileNotFoundException, ParseException {
         //读取块参数,参数格式:<块编号,块数目,块外框左下角x,块外框左下角y,块外框右上角x,块外框右上角y>
         Parser dxfParser = ParserBuilder.createDefaultParser();
-        dxfParser.parse(new FileInputStream(dataPath), "GBK");
+        dxfParser.parse(new FileInputStream(dataPath), "utf-8");
         DXFDocument doc = dxfParser.getDocument();
         List<List<String>> block = getDXFInsertByBlockName(doc);
         return block;

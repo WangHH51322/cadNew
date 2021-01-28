@@ -155,7 +155,7 @@ public class ReadCad {
 
         for (int j = 0; j < node.size(); j++) {
             for (int i = 0; i < pipe.size(); i++) {
-                DecimalFormat df   = new DecimalFormat("######0.0");
+                DecimalFormat df   = new DecimalFormat("######0.0000");
                 //管段i的起点x 转化值
                 int var1 = (int)Double.parseDouble(pipe.get(i).get(1));
                 double var11 = Double.parseDouble(pipe.get(i).get(1));

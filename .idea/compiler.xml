@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cadNew" />
+        <module name="新建文件夹" />
         <module name="cadintegration" />
         <module name="cadintegration02" />
-        <module name="新建文件夹" />
+        <module name="cadNew" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="12" />
+    <bytecodeTargetLevel target="15" />
   </component>
 </project>

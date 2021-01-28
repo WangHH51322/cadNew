@@ -25,16 +25,16 @@ public class test01 {
     public static void main(String[] args) throws FileNotFoundException, ParseException {
 
         //.dxf文件存放的路径
-        String dataPath = "D:\\data\\data3.dxf";
+        String dataPath = "C:\\Users\\WangHH\\Desktop\\机场CAD\\v04.dxf";
 //        String dataPath = "D:\\data\\test1.dxf";
 
         //需要读取的管段所在的图层名称,目前支持最多5个图层
 
         List<String> LayerNames = new ArrayList<>();
-//        LayerNames.add("--GY-DN150");
-        LayerNames.add("--GY-DN300");
-        LayerNames.add("--GY-DN400");
-        LayerNames.add("--GY-DN450");
+        LayerNames.add("GY-DN150");
+        LayerNames.add("GY-DN400");
+        LayerNames.add("GY-DN500");
+        LayerNames.add("GY-DN600");
 //        LayerNames.add("--GY-阀门井");
 //        LayerNames.add("--GY-阀门井");
 //        LayerNames.add("--GY-管道DN450");
@@ -53,6 +53,10 @@ public class test01 {
         //将各个图层的管段合并到一起
         List<List<String>> pipe = pipeContact(dataPath,LayerNames);
         List<List<String>> node = nodeContact(dataPath,LayerNames);
+//
+//        String excelPath = "C:\\Users\\WangHH\\Desktop\\机场CAD\\dataPipe.xlsx";
+//        String pipeSheetName = "pipe01";
+//        dataExcel(pipe,excelPath,pipeSheetName);
 
         //管段自动排错
         List<String> error = errorPipeFirst(pipe);

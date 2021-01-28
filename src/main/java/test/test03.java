@@ -12,9 +12,12 @@ import java.util.List;
  */
 public class test03 {
     public static void main(String[] args) {
-        String str = "aaa,bbb,ccc";
-
-        List<String> lis = Arrays.asList(str.split(","));
-        System.out.println(lis);
+        List<Integer> n2 = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            n2.add(i*5);
+        }
+        System.out.println(n2);
+        n2.remove(Integer.valueOf(5));
+        System.out.println(n2);
     }
 }

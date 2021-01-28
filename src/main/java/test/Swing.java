@@ -66,7 +66,7 @@ public class Swing {
         panel12.add(btn04);
 
         JLabel jLabel03=new JLabel("结果输出:");
-        JTextArea jta2 = new JTextArea(5,25);
+        final JTextArea jta2 = new JTextArea(5,25);
         jta2.setLineWrap(true);
         jta2.setFont(new Font(null, Font.PLAIN, 15));
         panel7.add(jLabel03);
@@ -77,7 +77,7 @@ public class Swing {
         List<String> layerNames = new ArrayList<>();
         layerNames.add("测试");
         JLabel jLabel04 = new JLabel("图层选择:");
-        MultiComboBoxs comboxstatus = new MultiComboBoxs(layerNames);
+        final MultiComboBoxs comboxstatus = new MultiComboBoxs(layerNames);
         panel9.add(jLabel04);
         panel10.add(comboxstatus);
 

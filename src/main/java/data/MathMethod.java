@@ -1,5 +1,6 @@
 package data;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -311,48 +312,53 @@ public class MathMethod {
         /*      */   }
     //将重合的加油栓坐标和节点坐标合并
     public static void addPlugIntoNode(List<List<String>> plug, List<List<String>> listTest) {
-        /* 1022 */     int k = 0;
-        /* 1023 */     for (int i = 0; i < plug.size(); i++) {
-            /* 1024 */       for (int j = 0; j < listTest.size(); j++) {
-                /*      */
-                /* 1026 */         int var1 = (int)Double.parseDouble(((List<String>)listTest.get(j)).get(1));
-                /*      */
-                /* 1028 */         int var2 = (int)Double.parseDouble(((List<String>)listTest.get(j)).get(2));
-                /*      */
-                /* 1030 */         int var3 = (int)Double.parseDouble(((List<String>)plug.get(i)).get(2));
-                /*      */
-                /* 1032 */         int var4 = (int)Double.parseDouble(((List<String>)plug.get(i)).get(3));
-                /*      */
-                /* 1034 */         if (var1 == var3 && var2 == var4) {
-                    /* 1035 */           listTest.get(j).set(3, "加油栓");
-                    /* 1036 */           k++;
-                    /*      */           break;
-                    /*      */         }
-                /*      */       }
-            /*      */     }
-        System.out.println("与节点重合的加油栓个数:" + k);
-        /*      */   }
+         DecimalFormat df = new DecimalFormat("######0.0000");
+         int k = 0;
+          for (int j = 0; j < listTest.size(); j++) {
+              for (int i = 0; i < plug.size(); i++) {
+
+                  double var1 = Double.parseDouble((listTest.get(j)).get(1));
+
+                  double var2 = Double.parseDouble((listTest.get(j)).get(2));
+
+                  double var3 = Double.parseDouble((plug.get(i)).get(2));
+
+                  double var4 = Double.parseDouble((plug.get(i)).get(3));
+
+                  if (df.format(var1).equals(df.format(var3)) && df.format(var2).equals(df.format(var4))) {
+                       listTest.get(j).set(3, "加油栓");
+                       k++;
+                       break;
+                  }
+              }
+          }
+          System.out.println("与节点重合的加油栓个数:" + k);
+    }
     //将不重合的加油栓坐标单独拿出,以便后面使用
     public static List<List<String>> removePlug(List<List<String>> plug, List<List<String>> listTest) {
-        /* 1045 */     List<List<String>> newPlugs = new ArrayList<>();
-        /* 1046 */     for (int i = 0; i < plug.size(); i++) {
-            /* 1047 */       for (int j = 0; j < listTest.size(); j++) {
-                /*      */
-                /* 1049 */         int var1 = (int)Double.parseDouble(((List<String>)listTest.get(j)).get(1));
-                /*      */
-                /* 1051 */         int var2 = (int)Double.parseDouble(((List<String>)listTest.get(j)).get(2));
-                /*      */
-                /* 1053 */         int var3 = (int)Double.parseDouble(((List<String>)plug.get(i)).get(2));
-                /*      */
-                /* 1055 */         int var4 = (int)Double.parseDouble(((List<String>)plug.get(i)).get(3));
-                /*      */
-                /* 1057 */         if (var1 == var3 && var2 == var4) {
-                    /* 1058 */           plug.remove(i);
-                    /* 1059 */           i--;
-                    /*      */         }
-                /*      */       }
-            /*      */     }
-        /* 1063 */     return plug;
-        /*      */   }
+        DecimalFormat df = new DecimalFormat("######0.0000");
+        List<List<String>> newPlugs = new ArrayList<>();
+         for (int i = 0; i < plug.size(); i++) {
+               for (int j = 0; j < listTest.size(); j++) {
+
+                     double var1 = Double.parseDouble((listTest.get(j)).get(1));
+
+                     double var2 = Double.parseDouble((listTest.get(j)).get(2));
+
+                     double var3 = Double.parseDouble((plug.get(i)).get(2));
+
+                     double var4 = Double.parseDouble((plug.get(i)).get(3));
+
+                     if (df.format(var1).equals(df.format(var3)) && df.format(var2).equals(df.format(var4))) {
+                           plug.remove(i);
+                           i--;
+                           if (i < 0){
+                               i = 0;
+                           }
+                         }
+                       }
+              }
+             return plug;
+           }
 
 }

@@ -41,12 +41,28 @@
 
     <build>
         <plugins>
+<!--            <plugin>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.8.0</version>-->
+<!--                <configuration> &lt;!&ndash;让编译器使用本地的12版本jdk&ndash;&gt;-->
+<!--                    <source>12</source>-->
+<!--                    <target>12</target>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration> <!--让编译器使用本地的12版本jdk-->
-                    <source>12</source>
-                    <target>12</target>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>

@@ -7,6 +7,7 @@ import java.util.List;
 
 import static data.MathMethod.add02;
 import static data.MathMethod.sequence;
+import static excel.Out2Excel.dataExcel;
 
 /**
  * @author Qing
@@ -14,6 +15,8 @@ import static data.MathMethod.sequence;
  * @date 2020/7/5 15:59
  */
 public class PlugCalculate {
+
+//    private List<Integer> n2;
 
     //将加油栓加入到拓扑结构中去
     public static List<List<String>> addPlug(List<List<String>> newPlug, List<List<String>> listTest, List<List<String>> pipe) {
@@ -26,8 +29,9 @@ public class PlugCalculate {
         List<Integer> n1 = new ArrayList<>();
 
         for (int j = 0; j < newPlug.size(); j++) {
+            System.out.println("pipe的数量：" + pipe.size());
             for (int i = 0; i < pipe.size(); i++) {
-                DecimalFormat df = new DecimalFormat("######0.0");
+                DecimalFormat df = new DecimalFormat("######0.00");
 
                 int var1 = (int)Double.parseDouble(pipe.get(i).get(1));
                 double var11 = Double.parseDouble(pipe.get(i).get(1));
@@ -51,7 +55,8 @@ public class PlugCalculate {
 
 
                 if (var3 == var4 && var7 == var3 && var6 < MathMethod.getBig(var1, var2) && var6 > MathMethod.getSmall(var1, var2)) {
-                    System.out.println("管段编号:" + pipe.get(i).get(0) + ",节点编号:" + (var5 + 1));
+                    System.out.println("管段编号1:" + pipe.get(i).get(0) + ",节点编号:" + (var5 + 1));
+
                     //在管段上的加油栓编号
                     n1.add(var5 + 1);
 
@@ -78,7 +83,6 @@ public class PlugCalculate {
                     list2.add(pipe.get(i).get(6));
 
                     list2.add(pipe.get(i).get(7));
-
 
 
                     pipe.remove(pipe.get(i));
@@ -89,7 +93,7 @@ public class PlugCalculate {
                     sequence(pipe);
                 }
                 else if (var1 == var2 && var6 == var1 && var7 < MathMethod.getBig(var3, var4) && var7 > MathMethod.getSmall(var3, var4)) {
-                    System.out.println("管段编号:" + pipe.get(i).get(0) + ",节点编号:" + (var5 + 1));
+                    System.out.println("管段编号2:" + pipe.get(i).get(0) + ",节点编号:" + (var5 + 1));
                     //在管段上的加油栓编号
                     n1.add(var5 + 1);
 
@@ -124,10 +128,13 @@ public class PlugCalculate {
                     pipe.add(list2);
                     sequence(pipe);
                 }
-                else if (var1 != var2 && var3 != var4 && var6 < MathMethod.getBig(var1, var2) && var6 > MathMethod.getSmall(var1, var2) && var7 < MathMethod.getBig(var3, var4) && var7 > MathMethod.getSmall(var3, var4) &&
-                    df.format((var44 - var33) / (var22 - var11)).equals(df.format((var44 - var77) / (var22 - var66))) && df.format((var44 - var33) / (var22 - var11)).equals(df.format((var33 - var77) / (var11 - var66)))) {
+                else if (var11 != var22 && var33 != var44 && var66 < MathMethod.getBig2(var11, var22) && var66 > MathMethod.getSmall2(var11, var22) && var77 < MathMethod.getBig2(var33, var44) && var77 > MathMethod.getSmall2(var33, var44) &&
+                    df.format((var44 - var33) / (var22 - var11)).equals(df.format((var44 - var77) / (var22 - var66))) && df.format((var44 - var33) / (var22 - var11)).equals(df.format((var33 - var77) / (var11 - var66))) ) { //
 
-                    System.out.println("管段编号:" + pipe.get(i).get(0) + ",节点编号:" + (var5 + 1));
+                    System.out.println(df.format((var44 - var33) / (var22 - var11)));
+                    System.out.println("管段编号3:" + pipe.get(i).get(0) + ",节点编号:" + (var5 + 1));
+//                    System.out.println("管段坐标:(" + pipe.get(i).get(1) + "," + pipe.get(i).get(2) + "),(" + pipe.get(i).get(4) + "," + pipe.get(i).get(5) + ")");
+
                     //在管段上的加油栓编号
                     n1.add(var5 + 1);
 
@@ -143,7 +150,6 @@ public class PlugCalculate {
                     list1.add((listTest.get(var5)).get(0));
 
                     list1.add((pipe.get(i)).get(7));
-
 
                     list2.add(null);
                     list2.add((listTest.get(var5)).get(1));
@@ -178,13 +184,15 @@ public class PlugCalculate {
         }
 
         System.out.println("在管段上的加油栓节点编号:" + n1);
+        System.out.println("n1大小" + n1.size());
         int y1 = y0 + newPlug.size();
-        //将在所有的单阀地井阀编号放入List<Integer>中
+        //将在所有的加油栓编号放入List<Integer>中
         List<Integer> n2 = new ArrayList<>();
         for (int i = y0+1; i <= y1; i++) {
             n2.add(i);
         }
         System.out.println("所有的非盲端加油栓节点编号:" + n2);
+        System.out.println("n2大小" + n2.size());
         if (n1.size() < n2.size()){
             loop:for (int i = Collections.min(n2); i <= Collections.max(n2); i++) {
                 for (int j = Collections.min(n1); j <= Collections.max(n1); j++) {
@@ -208,13 +216,36 @@ public class PlugCalculate {
 
             }
         }
+        if (n1.size() > n2.size()){
+            loop:for (int i = Collections.min(n1); i <= Collections.max(n1); i++) {
+                for (int j = Collections.min(n2); j <= Collections.max(n2); j++) {
+                    if (i == j){
+                        n1.remove(Integer.valueOf(i));
+                        n2.remove(Integer.valueOf(j));
+                        if (n2.size() == 0){
+                            break loop;
+                        }
+                    }
+                }
+            }
+            System.out.println("重复统计的加油栓节点编号:" + n1);
+            for (int i = 0; i < n1.size(); i++) {
+                loop:for (int j = 0; j < listTest.size(); j++) {
+                    if (n1.get(i) == Integer.parseInt(listTest.get(j).get(0))){
+                        System.out.println("重复统计的加油栓节点" + n1.get(i) + "的坐标为:(" + listTest.get(j).get(1) + "," + listTest.get(j).get(2) + ")");
+                        break loop;
+                    }
+                }
+
+            }
+        }
         return pipe;
     }
 
-    //获得哦所有块对象中的加油栓
+    //获得所有块对象中的加油栓
     public static List<List<String>> getPlug(List<List<String>> block){
         List<List<String>> plug = new ArrayList<>();
-        System.out.println("所有块:" + block);
+//        System.out.println("所有块:" + block);
         for (int i = 0; i < block.size(); i++) {
             if (block.get(i).get(0).contains("栓")){
                 plug.add(block.get(i));
