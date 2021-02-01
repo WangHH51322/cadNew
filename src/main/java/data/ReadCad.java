@@ -175,7 +175,7 @@ public class ReadCad {
                 int var7 = (int)Double.parseDouble(node.get(j).get(1));
                 double var77 = Double.parseDouble(node.get(j).get(1));
 
-                //管段水平,单阀在管段上
+                //管段水平,节点在管段上
                 if (var3 == var4 && var7 == var3 && var6 < getBig(var1,var2) && var6 > getSmall(var1,var2)){
 //                        System.out.println("管段编号:" + pipe.get(i).get(0) + ",节点编号:" + (var5+1));
                     List<String> list1 = new ArrayList<String>();
@@ -244,7 +244,7 @@ public class ReadCad {
                     pipe.add(list2);
                     sequence(pipe);
                 }else
-                if ( var1 != var2 && var3 != var4 && var6 < getBig(var1,var2) && var6 > getSmall(var1,var2) && var7 < getBig(var3,var4) && var7 > getSmall(var3,var4)
+                if ( var11 != var22 && var33 != var44 && var66 < getBig2(var11,var22) && var66 > getSmall2(var11,var22) && var77 < getBig2(var33,var44) && var77 > getSmall2(var33,var44)
                         && df.format((var44 - var33) / (var22 - var11)).equals(df.format((var44 - var77) / (var22 - var66))) && df.format((var44 - var33) / (var22 - var11)).equals(df.format((var33 - var77) / (var11 - var66))))
                 {
                     //管道倾斜时
