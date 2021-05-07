@@ -5,7 +5,9 @@ import org.kabeja.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static data.MathMethod.addPlugIntoNode;
 import static data.MathMethod.removePlug;
@@ -153,8 +155,67 @@ public class Result {
         System.out.println("加入加油栓后节点数目:" + nodeList.size());
         System.out.println("*************************************");
 
+        //将阀门点转换为阀门起点和终点两个点
+        List<List<String>> valveCount = new ArrayList<>();
+        Map<String,String> couple = new HashMap<>();
+        int nodeListSize = nodeList.size();
+        int num = 1;
+        for (int i = 0; i < nodeList.size(); i++) {
+            if (nodeList.get(i).get(3).equals("阀门")) {
+                List<String> nodeCopy = new ArrayList<>();
+                nodeCopy.add(String.valueOf((nodeListSize+num)));
+                nodeCopy.add(nodeList.get(i).get(1));
+                nodeCopy.add(nodeList.get(i).get(2));
+                nodeCopy.add("阀门" + num + "-" + "2");
+                nodeList.add(nodeCopy);
 
-        String excelPath = "C:\\Users\\WangHH\\Desktop\\机场CAD\\data.xlsx";
+                nodeList.get(i).set(3,("阀门" + num + "-" + "1"));
+                valveCount.add(nodeList.get(i));
+                //将同一个阀门的两个节点成对存储
+                couple.put(nodeList.get(i).get(0),nodeCopy.get(0));
+                num ++;
+            }
+        }
+        System.out.println();
+        //修改管段进出口节点编号
+        for (int i = 0; i < valveCount.size(); i++) {
+            int count = 0;
+            String nodeNumb = valveCount.get(i).get(0);
+            for (int j = 0; j < pipeList.size(); j++) {
+                if (pipeList.get(j).get(3).equals(nodeNumb) || pipeList.get(j).get(6).equals(nodeNumb)) { //管段起终点刚好是阀节点
+                    if (count == 0) {
+                        count ++;
+                    } else if (count == 1) {
+                        if (pipeList.get(j).get(3).equals(nodeNumb)) {
+                            pipeList.get(j).set(3,couple.get(nodeNumb));
+                        } else if (pipeList.get(j).get(6).equals(nodeNumb)) {
+                            pipeList.get(j).set(6,couple.get(nodeNumb));
+                        }
+                        count ++;
+                    } else if (count > 1) {
+                        System.out.println("同一个阀门连接超过两根管段,此阀门编号为:" + valveCount.get(i).get(0));
+                    }
+                }
+            }
+        }
+        //将阀门作为元件加入pipeList
+        int pipeListSize = pipeList.size();
+        for (int i = 0; i < valveCount.size(); i++) {
+            List<String> valveCopy = new ArrayList<>();
+            valveCopy.add(String.valueOf((pipeListSize+i+1)));
+            valveCopy.add(valveCount.get(i).get(1));
+            valveCopy.add(valveCount.get(i).get(2));
+            valveCopy.add(valveCount.get(i).get(0));
+            valveCopy.add(valveCount.get(i).get(1));
+            valveCopy.add(valveCount.get(i).get(2));
+            valveCopy.add(couple.get(valveCount.get(i).get(0)));
+            valveCopy.add("阀门" + (i+1));
+            valveCopy.add("0");
+
+            pipeList.add(valveCopy);
+        }
+
+        String excelPath = "D:\\Data\\Work\\项目\\AirPort\\机场数据\\Guangzhou\\data.xlsx";
         String pipeSheetName = "pipe";
         dataExcel(pipeList,excelPath,pipeSheetName);
         String nodeSheetName = "node";

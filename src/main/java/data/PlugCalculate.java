@@ -245,7 +245,7 @@ public class PlugCalculate {
     //获得所有块对象中的加油栓
     public static List<List<String>> getPlug(List<List<String>> block){
         List<List<String>> plug = new ArrayList<>();
-//        System.out.println("所有块:" + block);
+        System.out.println("所有块:" + block);
         for (int i = 0; i < block.size(); i++) {
             if (block.get(i).get(0).contains("栓")){
                 plug.add(block.get(i));

@@ -43,7 +43,7 @@ public class GetBlock {
                             //System.out.println("阀的个数" + count);
                             //单阀地井阀参数
                             //地井阀参数格式:<阀编号,阀数目,地井阀基点x,地井阀基点y,null,null>
-                            if ((i.getBlockID()).contains("单") && (i.getBlockID()).contains("阀")){
+                            if ((i.getBlockID()).contains("单") && (i.getBlockID()).contains("阀") || i.getBlockID().contains("3类") || i.getBlockID().contains("7类")){
                                 valve.add(i.getBlockID());
                                 valve.add(String.valueOf(1));
                                 valve.add(String.valueOf(i.getPoint().getX()));
@@ -54,7 +54,7 @@ public class GetBlock {
                             }else
                                 //双阀地井阀参数
                                 //地井阀参数格式:<阀编号,阀数目,地井阀外框左下角x,地井阀外框左下角y,地井阀外框右上角x,地井阀外框右上角y>
-                                if ((i.getBlockID()).contains("双") && (i.getBlockID()).contains("阀")){
+                                if ((i.getBlockID()).contains("双") && (i.getBlockID()).contains("阀") || i.getBlockID().contains("2类") || i.getBlockID().contains("4类")){
                                     valve.add(i.getBlockID());
                                     valve.add(String.valueOf(2));
                                     valve.add(String.valueOf(b.getMinimumX()));
@@ -65,7 +65,7 @@ public class GetBlock {
                                 }else
                                     //三阀地井阀参数
                                     //地井阀参数格式:<阀编号,阀数目,地井阀外框左下角x,地井阀外框左下角y,地井阀外框右上角x,地井阀外框右上角y>
-                                    if ((i.getBlockID()).contains("三") && (i.getBlockID()).contains("阀")){
+                                    if ((i.getBlockID()).contains("三") && (i.getBlockID()).contains("阀") || i.getBlockID().contains("1类") || i.getBlockID().contains("6类")){
                                         valve.add(i.getBlockID());
                                         valve.add(String.valueOf(3));
                                         valve.add(String.valueOf(b.getMinimumX()));

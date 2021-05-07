@@ -804,8 +804,11 @@ public class ValveCalculate {
             valves.add(valve03);
           }
         }
-      } else {
-        String error = "[此三阀地井阀内的节点数不为2存在问题,坐标为：(" + (String)((List<String>)valveThree.get(k)).get(1) + "," + (String)((List<String>)valveThree.get(k)).get(2) + ")]";
+      } else if (valveThreeNodes.size() == 1){
+        String error = "[此三阀地井阀内的节点数为1个，存在问题,坐标为：(" + (String)((List<String>)valveThree.get(k)).get(1) + "," + (String)((List<String>)valveThree.get(k)).get(2) + ")]";
+        errors.add(error);
+      } else if (valveThreeNodes.size() > 2){
+        String error = "[此三阀地井阀内的节点数大于2个，存在问题,坐标为：(" + (String)((List<String>)valveThree.get(k)).get(1) + "," + (String)((List<String>)valveThree.get(k)).get(2) + ")]";
         errors.add(error);
       }
       System.out.println(valves);
